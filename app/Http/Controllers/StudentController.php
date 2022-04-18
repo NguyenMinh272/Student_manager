@@ -20,17 +20,7 @@ class StudentController extends Controller
     public function store(Request $request){
         $student = new Student();
         $faculties = Faculty::all();
-        $student->id = $request->id;
-        $student->full_name = $request->full_name;
-        $student->address = $request->address;
-        $student->email = $request->email;
-        $student->birthday = $request->birthday;
-        $student->gender = $request->gender;
-        $student->phone = $request->phone;
-        $student->faculty_id = $request->faculty_id;
-
-        $student->save();
-//        dd($student);
+        $student->create($request->all());
 
         return redirect()->route('students.store');
     }
@@ -41,7 +31,6 @@ class StudentController extends Controller
     }
     public function update(Request $request, $id){
         $this->validate($request, [
-            'id'=>'required',
             'full_name'=>'required',
             'address'=>'required',
             'email'=>'required',
@@ -52,7 +41,6 @@ class StudentController extends Controller
         ]);
         $student = Student::find($id);
         $student->update([
-            'id' => $request->id,
             'full_name' => $request->full_name,
             'address' => $request->address,
             'email' => $request->email,
