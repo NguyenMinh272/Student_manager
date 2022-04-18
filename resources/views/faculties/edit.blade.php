@@ -1,6 +1,7 @@
 @extends('layouts/master')
 @section('faculty_edit')
-    <div class="container" style="width: 60%; ">
+
+    <div class="container">
         <div class="card">
             <div class="card-header">
                 <div class="row">
@@ -13,18 +14,13 @@
                 </div>
             </div>
             <div class="card-body">
-                <form action="{{route('faculties.update', $faculty->id)}}" method="post">
-                    @csrf
-                    @method('PUT')
-                    <div class="row">
+                {{  Form::open(array('route' => array('faculties.update', $faculty->id), 'method'=>'put')) }}
+
+                <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <strong>ID</strong>
-                                <input type="text" name="id" value="{{$faculty->id}}" class="form-control">
-                            </div>
-                            <div class="form-group">
                                 <strong>Faculty name</strong>
-                                <input type="text" name="name" value="{{$faculty->name}}"  class="form-control">
+                                {{Form::text('name',$faculty->name, array('class' => 'form-control'))}}
                             </div>
                         </div>
                     </div>

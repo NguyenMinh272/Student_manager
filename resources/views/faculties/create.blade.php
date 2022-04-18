@@ -13,23 +13,17 @@
                 </div>
             </div>
             <div class="card-body">
-                <form action="{{route('faculties.store')}}" method="POST">
-                    @csrf
-                    @method('POST')
+                {{ Form::open(array('route' => 'faculties.store','method' => 'post')) }}
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <strong>ID</strong>
-                                <input type="text" name="id" class="form-control">
-                            </div>
-                            <div class="form-group">
                                 <strong>Faculty name</strong>
-                                <input type="text" name="name" class="form-control">
+                                {{Form::text('name','', array('class' => 'form-control'))}}
                             </div>
                         </div>
                     </div>
-                    <button type="submit" class="btn btn-success mt-2">Save</button>
-                </form>
+                {{Form::submit('Submit', array('class' => 'btn btn-success mt-2'))}}
+                {{ Form::close() }}
             </div>
         </div>
     </div>

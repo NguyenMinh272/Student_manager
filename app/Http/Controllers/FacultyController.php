@@ -30,13 +30,13 @@ class FacultyController extends Controller
 
     public function update(Request $request, $id){
         $this->validate($request,[
-            'id'=>'required',
-            'name'=>'required'
+
+            'name'=>'required|max:50'
         ]);
         $faculty = Faculty::find($id);
         $faculty->update($request->all());
 
-        return redirect()->route('faculties.index', compact('faculty'));
+        return redirect()->route('faculties.index', compact('faculty'))->with('success','Update successfully!');
     }
     public function delete($id){
         $faculty = Faculty::find($id);

@@ -9,11 +9,10 @@ class Faculty extends Model
 {
     use HasFactory;
     protected $table = 'faculties';
-    public $timestamps = false;
     protected $fillable = ['id','name'];
 
     public function students(){
-        return $this->hasMany(Student::class, 'faculty_id', 'id');
+        return $this->hasMany(Student::class);
     }
 
 }
