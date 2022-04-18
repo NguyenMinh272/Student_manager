@@ -6,11 +6,11 @@ use App\Models\Faculty;
 use App\Models\Student;
 
 use Illuminate\Http\Request;
-
+use DB;
 class StudentController extends Controller
 {
     public function index(){
-        $students = Student::all();
+        $students = DB::table('students')->paginate(5);
         return view('students.index', compact('students'));
     }
     public function create(){
