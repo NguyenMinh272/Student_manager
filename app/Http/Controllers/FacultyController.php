@@ -4,12 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Models\Faculty;
 use Illuminate\Http\Request;
+use DB;
 
 class FacultyController extends Controller
 {
     public function index(){
-        $faculties = Faculty::all();
-
+        $faculties = DB::table('faculties')->paginate(5);
         return view("faculties.list", compact('faculties'));
     }
 
@@ -18,16 +18,13 @@ class FacultyController extends Controller
     }
     public function store(Request $request){
         $faculty = new Faculty();
-        $faculty->id = $request->id;
-        $faculty->name = $request->name;
-        $faculty->save();
-//        dd($faculty);
+        $faculty->create($request->all());
 
         return redirect()->route('faculties.index')->with('success','Create successfully!');
     }
     public function edit($id){
         $faculty = Faculty::find($id);
-//        dd($faculty);
+
         return view('faculties.edit', compact('faculty'));
     }
 
@@ -37,14 +34,8 @@ class FacultyController extends Controller
             'name'=>'required'
         ]);
         $faculty = Faculty::find($id);
-        $faculty->update(
-            [
-                'id' => $request->id,
-                'name' => $request->name
-            ]
-        );
-//        dd($request);
-//     dd($faculty);
+        $faculty->update($request->all());
+
         return redirect()->route('faculties.index', compact('faculty'));
     }
     public function delete($id){
