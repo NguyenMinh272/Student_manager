@@ -16,7 +16,6 @@
                 <table class="table table-bordered">
                     <thead>
                     <tr>
-                        <td>ID</td>
                         <td>Student name</td>
                         <td>Faculty </td>
                         <td>Email</td>
@@ -27,9 +26,8 @@
                     <tbody>
                     @if(!empty($students))
                         @foreach ($students as $student)
-                            <td>{{$student->id}}</td>
                             <td>{{$student->full_name}}</td>
-                            <td>{{$student->faculty->name}}</td>
+                            <td>{{$student->faculties->name}}</td>
                             <td>{{$student->email}}</td>
                             <td>{{$student->address}}</td>
                             <td class="center"><i class="fa fa-trash-o  fa-fw"></i><a href="{{ route('students.delete', $student->id) }}"> Delete</a></td>

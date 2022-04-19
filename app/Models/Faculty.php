@@ -12,7 +12,6 @@ class Faculty extends Model
     protected $fillable = ['id','name'];
 
     public function students(){
-        return $this->hasMany(Student::class);
+        return $this->hasMany(Student::class,'student_id','id');
     }
-
 }

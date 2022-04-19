@@ -7,6 +7,8 @@ use App\Models\Student;
 
 use Illuminate\Http\Request;
 use DB;
+use function Symfony\Component\String\s;
+
 class StudentController extends Controller
 {
     public function index(){
@@ -20,9 +22,17 @@ class StudentController extends Controller
     public function store(Request $request){
         $student = new Student();
         $faculties = Faculty::all();
-        $student->create($request->all());
+        $student->full_name = $request->full_name;
+        $student->address = $request->address;
+        $student->email = $request->email;
+        $student->birthday = $request->birthday;
+        $student->gender = $request->gender;
+        $student->phone = $request->phone;
+        $student->faculty_id = $request->faculty_id;
 
-        return redirect()->route('students.store');
+        $student->save();
+
+        return redirect()->route('students.index')->with('success','Create student successful!');
     }
     public function edit($id){
         $student = Student::find($id);

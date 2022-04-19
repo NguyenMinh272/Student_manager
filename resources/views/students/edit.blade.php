@@ -13,18 +13,16 @@
                 </div>
             </div>
             <div class="card-body">
-                <form action="{{route('students.update', $student->id)}}" method="post">
-                    @csrf
-                    @method('PUT')
+                {{Form::open(array('route'=>array('students.update',$student->id,'method'=>'put')))}}
+{{--                <form action="{{route('students.update', $student->id)}}" method="post">--}}
+{{--                    @csrf--}}
+{{--                    @method('PUT')--}}
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <strong>ID</strong>
-                                <input type="text" name="id" value="{{$student->id}}" class="form-control">
-                            </div>
-                            <div class="form-group">
                                 <strong>Student name</strong>
-                                <input type="text" name="full_name" value="{{$student->full_name}}"  class="form-control">
+                                {{Form::text('name',$student->full_name, array('class'=>'form-control'))}}
+{{--                                <input type="text" name="full_name" value="{{$student->full_name}}"  class="form-control">--}}
                             </div>
                             <div class="form-group">
                                 <strong>Faculty</strong>
@@ -36,22 +34,22 @@
                             </div>
                             <div class="form-group">
                                 <strong>Address</strong>
-                                <input type="text" name="address" class="form-control">
+                                {{Form::text('address',$student->address, array('class'=>'form-control'))}}
                             </div>
 
                             <div class="form-group">
                                 <strong>Email</strong>
-                                <input type="email" name="email" class="form-control">
+                                {{Form::text('email',$student->email, array('class'=>'form-control'))}}
                             </div>
 
                             <div class="form-group">
                                 <strong>Birthday</strong>
-                                <input type="date" name="birthday" class="form-control">
+                                {{Form::date('birthday', '' , array('class'=>'form-control'))}}
                             </div>
 
                             <div class="form-group">
                                 <strong>Phone number</strong>
-                                <input type="text" name="phone" class="form-control">
+                                {{Form::text('phone', '' , array('class'=>'form-control'))}}
                             </div>
 
                             <div class="form-group">
@@ -66,7 +64,7 @@
                         </div>
                     </div>
                     <button type="submit" class="btn btn-success mt-2">Update</button>
-                </form>
+                {{Form::close()}}
             </div>
         </div>
     </div>

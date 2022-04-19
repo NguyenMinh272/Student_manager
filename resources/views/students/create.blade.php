@@ -18,10 +18,7 @@
                     @method('POST')
                     <div class="row">
                         <div class="col-md-6">
-                            <div class="form-group">
-                                <strong>ID</strong>
-                                <input type="text" name="id" class="form-control">
-                            </div>
+
                             <div class="form-group">
                                 <strong>Student name</strong>
                                 <input type="text" name="full_name" class="form-control">

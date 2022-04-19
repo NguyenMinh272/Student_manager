@@ -9,9 +9,7 @@ class Student extends Model
 {
 
     protected $table = 'students';
-    public $timestamps = false;
     protected $fillable = [
-        'id',
         'full_name',
         'address',
         'email',
@@ -21,14 +19,13 @@ class Student extends Model
         'gender',
         'phone',
         'avatar',
+        'faculty_id'
 
     ];
 
-    public function faculty(){
-        return $this->belongsTo(Faculty::class, 'faculty_id','id');
+    public function faculty()
+    {
+        return $this->belongsTo(Faculty::class,'faculty_id','id');
+    }
 
-    }
-    public function studentSubject(){
-        return $this->hasMany(Student_Subject::class, 'student_id', 'id');
-    }
 }
