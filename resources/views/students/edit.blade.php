@@ -14,15 +14,11 @@
             </div>
             <div class="card-body">
                 {{Form::open(array('route'=>array('students.update',$student->id,'method'=>'put')))}}
-{{--                <form action="{{route('students.update', $student->id)}}" method="post">--}}
-{{--                    @csrf--}}
-{{--                    @method('PUT')--}}
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
                                 <strong>Student name</strong>
                                 {{Form::text('name',$student->full_name, array('class'=>'form-control'))}}
-{{--                                <input type="text" name="full_name" value="{{$student->full_name}}"  class="form-control">--}}
                             </div>
                             <div class="form-group">
                                 <strong>Faculty</strong>
