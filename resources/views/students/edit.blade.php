@@ -18,7 +18,7 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <strong>Student name</strong>
-                                {{Form::text('name',$student->full_name, array('class'=>'form-control'))}}
+                                {{Form::text('full_name',$student->full_name, array('class'=>'form-control'))}}
                             </div>
                             <div class="form-group">
                                 <strong>Faculty</strong>
@@ -35,7 +35,7 @@
 
                             <div class="form-group">
                                 <strong>Email</strong>
-                                {{Form::text('email',$student->email, array('class'=>'form-control'))}}
+                                {{Form::text('email', $student->email, array('class' => 'form-control'))}}
                             </div>
 
                             <div class="form-group">
@@ -51,10 +51,10 @@
                             <div class="form-group">
                                 <strong>Gender</strong>
                                 <label class="radio-inline">
-                                    <input name="gender" value="0" checked="" type="radio">Nam
+                                    {{Form::radio('gender', '0', true)}} Nam
                                 </label>
                                 <label class="radio-inline">
-                                    <input name="gender" value="1" type="radio">Nữ
+                                    {{Form::radio('gender', '1', true)}} Nữ
                                 </label>
                             </div>
                         </div>

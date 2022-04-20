@@ -5,7 +5,7 @@
             <div class="card-header">
                 <div class="row">
                     <div class="col-md-6">
-                        <h3>Add new faculty</h3>
+                        <h3>New faculty</h3>
                     </div>
                     <div class="col-md-6">
                         <a href="{{route('faculties.index')}}" class="btn btn-primary float-end">Faculties List</a>

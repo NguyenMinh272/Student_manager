@@ -8,7 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class Student extends Model
 {
 
-    protected $table = 'students';
     protected $fillable = [
         'full_name',
         'address',
@@ -25,7 +24,7 @@ class Student extends Model
 
     public function faculty()
     {
-        return $this->belongsTo(Faculty::class,'faculty_id','id');
+        return $this->belongsTo(Faculty::class);
     }
 
 }

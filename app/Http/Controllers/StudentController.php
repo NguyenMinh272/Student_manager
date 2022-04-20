@@ -8,62 +8,109 @@ use App\Models\Student;
 use Illuminate\Http\Request;
 use DB;
 use function Symfony\Component\String\s;
-
+use App\Repositories\Student\StudentRepositoryInterface;
 class StudentController extends Controller
 {
-    public function index(){
-        $students = DB::table('students')->paginate(5);
-        return view('students.index', compact('students'));
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    protected $studentRepo;
+    public function __construct(StudentRepositoryInterface $studentRepo)
+    {
+        $this->studentRepo = $studentRepo;
     }
-    public function create(){
+
+    public function index()
+    {
+        $faculties = new Faculty();
+        $students = DB::table('students')->paginate(5);
+        return view('students.index', compact('students','faculties'));
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
         $faculties = Faculty::all();
         return view('students.create', compact('faculties'));
     }
-    public function store(Request $request){
-        $student = new Student();
-        $faculties = Faculty::all();
-        $student->full_name = $request->full_name;
-        $student->address = $request->address;
-        $student->email = $request->email;
-        $student->birthday = $request->birthday;
-        $student->gender = $request->gender;
-        $student->phone = $request->phone;
-        $student->faculty_id = $request->faculty_id;
 
-        $student->save();
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
 
+        $student = $request->all();
+        $student = $this->studentRepo->create($student);
         return redirect()->route('students.index')->with('success','Create student successful!');
+
     }
-    public function edit($id){
-        $student = Student::find($id);
+
+    /**
+     * Display the specified resource.
+     *
+     * @param int $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        //
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param int $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+        $student = $this->studentRepo->find($id);
         $faculties = Faculty::all();
         return view('students.edit', compact('student', 'faculties'));
     }
-    public function update(Request $request, $id){
-        $this->validate($request, [
-            'full_name'=>'required',
-            'address'=>'required',
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, $id)
+    {
+            $this->validate($request, [
+            'full_name'=>'required|min:6|max:40',
+            'address'=>'required|max:255',
             'email'=>'required',
             'birthday'=>'required',
             'gender'=>'required',
-            'phone'=>'required',
+            'phone'=>'required|date',
             'faculty_id'=>'required'
         ]);
-        $student = Student::find($id);
-        $student->update([
-            'full_name' => $request->full_name,
-            'address' => $request->address,
-            'email' => $request->email,
-            'birthday' => $request->birthday,
-            'gender' => $request->gender,
-            'phone' => $request->phone,
-            'faculty_id'=>$request->faculty_id
-        ]);
+            $student = $this->studentRepo->find($id);
+            $student->update($request->all());
         return redirect()->route('students.index', $id);
-
     }
-    public function delete($id){
-        $student = Student::find($id);
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param int $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+        $student = $this->studentRepo->find($id);
         $student->delete();
         return redirect()->route('students.index');
     }

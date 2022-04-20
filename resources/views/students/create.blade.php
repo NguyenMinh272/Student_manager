@@ -5,7 +5,7 @@
             <div class="card-header">
                 <div class="row">
                     <div class="col-md-6">
-                        <h3>Add new student</h3>
+                        <h3>New student</h3>
                     </div>
                     <div class="col-md-6">
                         <a href="{{route('students.index')}}" class="btn btn-primary float-end">Students List</a>
@@ -13,15 +13,14 @@
                 </div>
             </div>
             <div class="card-body">
-                <form action="{{route('students.store')}}" method="POST">
-                    @csrf
-                    @method('POST')
+                {{Form::open(array('route'=>array('students.store','method'=>'post')))}}
+
                     <div class="row">
                         <div class="col-md-6">
 
                             <div class="form-group">
                                 <strong>Student name</strong>
-                                <input type="text" name="full_name" class="form-control">
+                                    {{Form::text('full_name','', array('class'=>'form-control'))}}
                             </div>
 
                             <div class="form-group">
@@ -34,38 +33,38 @@
                             </div>
                             <div class="form-group">
                                 <strong>Address</strong>
-                                <input type="text" name="address" class="form-control">
+                                    {{Form::text('address','', array('class'=>'form-control'))}}
                             </div>
 
                             <div class="form-group">
                                 <strong>Email</strong>
-                                <input type="email" name="email" class="form-control">
+                                    {{Form::email('email', '', array('class' => 'form-control'))}}
                             </div>
 
                             <div class="form-group">
                                 <strong>Birthday</strong>
-                                <input type="date" name="birthday" class="form-control">
+                                    {{Form::date('birthday', '' , array('class'=>'form-control'))}}
                             </div>
 
                             <div class="form-group">
                                 <strong>Phone number</strong>
-                                <input type="text" name="phone" class="form-control">
+                                    {{Form::text('phone', '' , array('class'=>'form-control'))}}
                             </div>
 
                             <div class="form-group">
                                 <strong>Gender</strong>
                                 <label class="radio-inline">
-                                    <input name="gender" value="0" checked="" type="radio">Nam
+                                    {{Form::radio('gender', '0', true)}} Nam
                                 </label>
                                 <label class="radio-inline">
-                                    <input name="gender" value="1" type="radio">Nữ
+                                    {{Form::radio('gender', '1', true)}} Nữ
                                 </label>
                             </div>
 
                         </div>
                     </div>
                     <button type="submit" class="btn btn-success mt-2">Save</button>
-                </form>
+                {{Form::close()}}
             </div>
         </div>
     </div>

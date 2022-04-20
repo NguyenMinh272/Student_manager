@@ -13,23 +13,17 @@
                 </div>
             </div>
             <div class="card-body">
-                <form action="{{route('subjects.update', $subject->id)}}" method="post">
-                    @csrf
-                    @method('PUT')
+                {{  Form::open(array('route' => array('subjects.update', $subject->id), 'method'=>'put')) }}
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <strong>ID</strong>
-                                <input type="text" name="id" value="{{$subject->id}}" class="form-control">
-                            </div>
-                            <div class="form-group">
                                 <strong>Subject name</strong>
-                                <input type="text" name="name" value="{{$subject->name}}"  class="form-control">
+                                {{Form::text('name',$subject->name, array('class' => 'form-control'))}}
                             </div>
                         </div>
                     </div>
                     <button type="submit" class="btn btn-success mt-2">Update</button>
-                </form>
+                {{ Form::close() }}
             </div>
         </div>
     </div>

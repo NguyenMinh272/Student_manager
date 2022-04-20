@@ -25,7 +25,7 @@
                         </div>
                     </div>
                     <button type="submit" class="btn btn-success mt-2">Update</button>
-                </form>
+                {{ Form::close() }}
             </div>
         </div>
     </div>
