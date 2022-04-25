@@ -55,7 +55,7 @@ class StudentController extends Controller
             'birthday'=>'required|date',
             'gender'=>'required',
             'phone'=>'required|max:12',
-            'faculty_id'=>'required|unique'
+            'faculty_id'=>'required'
         ]);
         $data = $request->all();
         $student = $this->studentRepo->create($data);

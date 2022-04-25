@@ -8,12 +8,12 @@
                         <h3>Edit subject</h3>
                     </div>
                     <div class="col-md-6">
-                        <a href="{{route('subjects.index')}}" class="btn btn-primary float-end">Subjects List</a>
+                        <a href="{{route('subject.index')}}" class="btn btn-primary float-end">Subjects List</a>
                     </div>
                 </div>
             </div>
             <div class="card-body">
-                {{  Form::open(array('route' => array('subjects.update', $subject->id), 'method'=>'put')) }}
+                {{  Form::open(array('route' => array('subject.update', $subject->id), 'method'=>'put')) }}
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">

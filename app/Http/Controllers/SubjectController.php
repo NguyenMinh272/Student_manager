@@ -25,8 +25,8 @@ class SubjectController extends Controller
 
     public function index()
     {
-        $subjects = DB::table('subjects')->paginate(5);
-        return view("subjects.index", compact('subjects'));
+        $subjects = $this->subjectRepo->getSubject();
+        return view('subjects.index', compact('subjects'));
     }
 
     /**
@@ -50,7 +50,7 @@ class SubjectController extends Controller
         $data = $request->all();
         $subject= $this->subjectRepo->create($data);
 
-        return redirect()->route('subjects.index')->with('success', 'Create successfully!');
+        return redirect()->route('subject.index')->with('success', 'Create successfully!');
     }
 
     /**
@@ -92,7 +92,7 @@ class SubjectController extends Controller
         $subject = $this->subjectRepo->find($id);
         $subject->update($request->all());
 
-        return redirect()->route('subjects.index', compact('subject'))->with('success', 'Update successfully!');
+        return redirect()->route('subject.index', compact('subject'))->with('success', 'Update successfully!');
     }
 
     /**
@@ -106,7 +106,7 @@ class SubjectController extends Controller
         $subject = $this->subjectRepo->find($id);
         $subject->delete();
 
-        return redirect()->route('subjects.index')->with('success', 'Delete successfully!');
+        return redirect()->route('subject.index')->with('success', 'Delete successfully!');
 
     }
 

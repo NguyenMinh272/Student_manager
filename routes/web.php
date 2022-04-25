@@ -16,4 +16,5 @@ use App\Http\Controllers\StudentController;
 */
 Route::resource('faculty', FacultyController::class);
 Route::resource('student',StudentController::class);
+Route::resource('subject',SubjectController::class);
 

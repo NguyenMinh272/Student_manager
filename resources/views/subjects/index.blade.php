@@ -8,7 +8,7 @@
                         <h3>Subject Management</h3>
                     </div>
                     <div class="col-md-6">
-                        <a href="{{route('subjects.create')}}" class="btn btn-primary float-end">New subject</a>
+                        <a href="{{route('subject.create')}}" class="btn btn-primary float-end">New subject</a>
                     </div>
                 </div>
             </div>
@@ -24,10 +24,24 @@
                     @if(!empty($subjects))
                         @foreach ($subjects as $subject)
                             <td>{{$subject->name}}</td>
-                            <td class="center"><i class="fa fa-trash-o  fa-fw"></i><a
-                                    href="{{ route('subjects.delete', $subject->id) }}"> Delete</a></td>
-                            <td class="center"><i class="fa fa-pencil fa-fw"></i> <a
-                                    href="{{ route('subjects.edit', $subject->id) }}">Edit</a></td>
+                            <td class="center">
+                                <form method="POST" action="{{route('subject.destroy',$subject->id)}}">
+                                    {{ csrf_field() }}
+                                    {{ method_field('DELETE') }}
+                                    <div class="form-group">
+                                        <input type="submit" class="btn btn-danger" value="Delete">
+                                    </div>
+                                </form>
+                            </td>
+
+                            <td class="center">
+                                <form method="POST" action="{{route('subject.edit',$subject->id)}}">
+                                    {{ csrf_field() }}
+                                    {{ method_field('GET') }}
+                                    <div class="form-group">
+                                        <input type="submit" class="btn btn-primary" value="Edit">
+                                    </div>
+                                </form>
                             </tr>
                     </tbody>
                     @endforeach

@@ -24,7 +24,7 @@ return new class extends Migration
             $table->tinyInteger('gender')->nullable();
             $table->char('phone',15)->nullable();
             $table->string('avatar',255)->nullable();
-            $table->integer('faculty_id')->unsigned();
+            $table->unsignedBigInteger('faculty_id')->unsigned();
             $table->foreign('faculty_id')->references('id')->on('faculties');
             $table->timestamps();
         });
@@ -32,7 +32,7 @@ return new class extends Migration
 
     /**
      * Reverse the migrations.
-     *
+
      * @return void
      */
     public function down()

@@ -1,6 +1,7 @@
 <?php
 namespace App\Repositories\Subject;
 
+use App\Models\Subject;
 use App\Repositories\BaseRepository;
 use App\Repositories\Subject\SubjectRepositoryInterface;
 
@@ -14,6 +15,6 @@ class SubjectRepository extends BaseRepository implements SubjectRepositoryInter
 
     public function getSubject()
     {
-        return $this->model->select('name')->take(5)->get();
+        return Subject::paginate(5);
     }
 }
