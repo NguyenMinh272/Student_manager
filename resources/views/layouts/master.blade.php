@@ -10,23 +10,10 @@
     <title>Student Management</title>
 </head>
 <body>
-
-        @include('layouts/header')
-
-        @yield('faculties_list')
-        @yield('faculty_create')
-        @yield('faculty_edit')
-
-        @yield('subject_list')
-        @yield('subject_create')
-        @yield('subject_edit')
-
-        @yield('student_list')
-        @yield('student_create')
-        @yield('student_edit')
-
-
-        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" ></script>
+@include('layouts/header')
+@include('layouts/flash_message')
+@yield('content')
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js"></script>
 </body>
 </html>

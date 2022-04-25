@@ -25,7 +25,7 @@ class StudentController extends Controller
     public function index()
     {
         $faculties = new Faculty();
-        $students = DB::table('students')->paginate(5);
+        $students = $this->studentRepo->getStudent();
         return view('students.index', compact('students','faculties'));
     }
 
@@ -48,11 +48,18 @@ class StudentController extends Controller
      */
     public function store(Request $request)
     {
-
-        $student = $request->all();
-        $student = $this->studentRepo->create($student);
-        return redirect()->route('students.index')->with('success','Create student successful!');
-
+        $this->validate($request, [
+            'full_name'=>'required|min:6|max:40',
+            'address'=>'required|max:255',
+            'email'=>'required|email:rfc,dns',
+            'birthday'=>'required|date',
+            'gender'=>'required',
+            'phone'=>'required|max:12',
+            'faculty_id'=>'required|unique'
+        ]);
+        $data = $request->all();
+        $student = $this->studentRepo->create($data);
+        return redirect()->route('student.index')->with('success','Create student successful!');
     }
 
     /**
@@ -92,14 +99,14 @@ class StudentController extends Controller
             'full_name'=>'required|min:6|max:40',
             'address'=>'required|max:255',
             'email'=>'required',
-            'birthday'=>'required',
+            'birthday'=>'required|date',
             'gender'=>'required',
-            'phone'=>'required|date',
+            'phone'=>'required|max:13',
             'faculty_id'=>'required'
         ]);
             $student = $this->studentRepo->find($id);
             $student->update($request->all());
-        return redirect()->route('students.index', $id);
+        return redirect()->route('student.index', $id);
     }
 
     /**
@@ -112,6 +119,6 @@ class StudentController extends Controller
     {
         $student = $this->studentRepo->find($id);
         $student->delete();
-        return redirect()->route('students.index');
+        return redirect()->route('student.index');
     }
 }

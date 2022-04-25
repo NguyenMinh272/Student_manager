@@ -1,5 +1,5 @@
 @extends('layouts/master')
-@section('subject_list')
+@section('content')
     <div class="container">
         <div class="card">
             <div class="card-header">
@@ -24,8 +24,10 @@
                     @if(!empty($subjects))
                         @foreach ($subjects as $subject)
                             <td>{{$subject->name}}</td>
-                            <td class="center"><i class="fa fa-trash-o  fa-fw"></i><a href="{{ route('subjects.delete', $subject->id) }}"> Delete</a></td>
-                            <td class="center"><i class="fa fa-pencil fa-fw"></i> <a href="{{ route('subjects.edit', $subject->id) }}">Edit</a></td>
+                            <td class="center"><i class="fa fa-trash-o  fa-fw"></i><a
+                                    href="{{ route('subjects.delete', $subject->id) }}"> Delete</a></td>
+                            <td class="center"><i class="fa fa-pencil fa-fw"></i> <a
+                                    href="{{ route('subjects.edit', $subject->id) }}">Edit</a></td>
                             </tr>
                     </tbody>
                     @endforeach
@@ -33,5 +35,5 @@
                 </table>
             </div>
         </div>
-    </div>
+
 @endsection

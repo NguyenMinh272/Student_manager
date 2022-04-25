@@ -4,8 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Faculty;
 use Illuminate\Http\Request;
-use DB;
+
 use App\Repositories\Faculty\FacultyRepositoryInterface;
+use phpDocumentor\Reflection\Types\Null_;
 
 
 class FacultyController extends Controller
@@ -22,8 +23,9 @@ class FacultyController extends Controller
     }
     public function index()
     {
-        $faculties = DB::table('faculties')->paginate(5);
-        return view("faculties.list", compact('faculties'));
+        $faculties = $this->facultyRepo->getFaculty();
+
+        return view('faculties.list', compact('faculties'));
     }
 
     /**
@@ -44,10 +46,13 @@ class FacultyController extends Controller
      */
     public function store(Request $request)
     {
+        $this->validate($request, [
+            'name' => 'required'
+        ]);
         $data = $request->all();
-        $faculty= $this->facultyRepo->create($data);
+        $faculty = $this->facultyRepo->create($data);
+        return redirect()->route('faculty.index')->with('success', 'Create successfully!');
 
-        return redirect()->route('faculties.index')->with('success','Create successfully!');
     }
 
     /**
@@ -89,7 +94,8 @@ class FacultyController extends Controller
         $faculty =$this->facultyRepo->find($id);
         $faculty->update($request->all());
 
-        return redirect()->route('faculties.index', compact('faculty'))->with('success','Update successfully!');
+        return redirect()->route('faculty.index', compact('faculty'))
+            ->with('success','Update successfully!');
     }
 
     /**
@@ -103,7 +109,6 @@ class FacultyController extends Controller
         $faculty = $this->facultyRepo->find($id);
         $faculty->delete();
 
-        return redirect()->route('faculties.index')->with('success','Delete successfully!');
-
+        return redirect()->route('faculty.index')->with('success','Delete successfully!');
     }
 }

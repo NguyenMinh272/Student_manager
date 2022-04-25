@@ -1,5 +1,5 @@
 @extends('layouts/master')
-@section('student_list')
+@section('content')
     <div class="container">
         <div class="card">
             <div class="card-header">
@@ -8,7 +8,7 @@
                         <h3>Student Management</h3>
                     </div>
                     <div class="col-md-6">
-                        <a href="{{route('students.create')}}" class="btn btn-primary float-end">New Student</a>
+                        <a href="{{route('student.create')}}" class="btn btn-primary float-end">New Student</a>
                     </div>
                 </div>
             </div>
@@ -17,7 +17,7 @@
                     <thead>
                     <tr>
                         <td>Student name</td>
-                        <td>Faculty </td>
+                        <td>Faculty</td>
                         <td>Email</td>
                         <td>Address</td>
                         <td colspan="2">Action</td>
@@ -27,17 +27,32 @@
                     @if(!empty($students))
                         @foreach ($students as $student)
                             <td>{{$student->full_name}}</td>
-                            <td>{{$student->faculties->name}}</td>
+                            <td>{{$student->faculty->name}}</td>
                             <td>{{$student->email}}</td>
                             <td>{{$student->address}}</td>
-                            <td class="center"><i class="fa fa-trash-o  fa-fw"></i><a href="{{ route('students.delete', $student->id) }}"> Delete</a></td>
-                            <td class="center"><i class="fa fa-pencil fa-fw"></i> <a href="{{ route('students.edit', $student->id) }}">Edit</a></td>
+                            <td class="center">
+                                <form method="POST" action="{{route('student.destroy',$student->id)}}">
+                                    {{ csrf_field() }}
+                                    {{ method_field('DELETE') }}
+                                    <div class="form-group">
+                                        <input type="submit" class="btn btn-danger" value="Delete">
+                                    </div>
+                                </form>
+                            <td class="center">
+                                <form method="POST" action="{{route('student.edit',$student->id)}}">
+                                    {{ csrf_field() }}
+                                    {{ method_field('GET') }}
+                                    <div class="form-group">
+                                        <input type="submit" class="btn btn-primary" value="Edit">
+                                    </div>
+                                </form>
+                            </td>
                             </tr>
                     </tbody>
                     @endforeach
                     @endif
                 </table>
+                {{$students->links("pagination::bootstrap-4")}}
             </div>
         </div>
-    </div>
 @endsection

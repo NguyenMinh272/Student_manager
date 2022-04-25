@@ -1,6 +1,7 @@
 <?php
 namespace App\Repositories\Student;
 
+use App\Models\Student;
 use App\Repositories\BaseRepository;
 
 class StudentRepository extends BaseRepository implements StudentRepositoryInterface
@@ -13,6 +14,6 @@ class StudentRepository extends BaseRepository implements StudentRepositoryInter
 
     public function getStudent()
     {
-        return $this->model->select('full_name')->take(5)->get();
+        return Student::paginate(5);
     }
 }
