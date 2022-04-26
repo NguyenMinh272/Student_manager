@@ -24,9 +24,9 @@ class StudentController extends Controller
 
     public function index()
     {
-        $faculties = new Faculty();
         $students = $this->studentRepo->getStudent();
-        return view('students.index', compact('students','faculties'));
+
+        return view('students.index', compact('students'));
     }
 
     /**
@@ -55,9 +55,16 @@ class StudentController extends Controller
             'birthday'=>'required|date',
             'gender'=>'required',
             'phone'=>'required|max:12',
+            'avatar'=>'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'faculty_id'=>'required'
         ]);
         $data = $request->all();
+        if ($request->hasFile('image')){
+            $file = $request->file('image');
+            $file_name = $file->move('images', $file->getClientOriginalName());
+            $data['avatar'] = $file_name;
+        }
+//        dd($data);
         $student = $this->studentRepo->create($data);
         return redirect()->route('student.index')->with('success','Create student successful!');
     }

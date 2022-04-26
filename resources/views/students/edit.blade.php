@@ -13,7 +13,7 @@
                 </div>
             </div>
             <div class="card-body">
-                {{Form::open(array('route'=>array('student.update',$student->id,'method'=>'put')))}}
+                {{Form::open(array('route'=> array('student.update', $student->id), 'method'=>'put','enctype'=>'multipart/form-data'))}}
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
@@ -46,6 +46,10 @@
                         <div class="form-group">
                             <strong>Phone number</strong>
                             {{Form::text('phone',$student->phone, array('class'=>'form-control'))}}
+                        </div>
+                        <div class="form-group">
+                            <strong>Avatar</strong>
+                            <input type="file" name="image" value="$student->avatar">
                         </div>
 
                         <div class="form-group">

@@ -16,6 +16,7 @@
                 <table class="table table-bordered">
                     <thead>
                     <tr>
+                        <td>Avatar</td>
                         <td>Student name</td>
                         <td>Faculty</td>
                         <td>Email</td>
@@ -26,6 +27,7 @@
                     <tbody>
                     @if(!empty($students))
                         @foreach ($students as $student)
+                          <td> <img width = "auto" height = "50px" src="{{asset(''.$student->avatar)}}"></td>
                             <td>{{$student->full_name}}</td>
                             <td>{{$student->faculty->name}}</td>
                             <td>{{$student->email}}</td>
