@@ -29,6 +29,20 @@
                             </select>
                         </div>
                         <div class="form-group">
+                            <strong>Subject</strong>
+                            <select class="form-control" name="subject_id">
+                                @foreach($subjects as $subject)
+                                    <option value="{{ $subject->id }}">{{ $subject->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <strong>Mark</strong>
+                            {{Form::text('mark',$student->mark, array('class'=>'form-control'))}}
+                        </div>
+
+
+                        <div class="form-group">
                             <strong>Address</strong>
                             {{Form::text('address',$student->address, array('class'=>'form-control'))}}
                         </div>

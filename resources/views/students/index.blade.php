@@ -21,13 +21,13 @@
                         <td>Faculty</td>
                         <td>Email</td>
                         <td>Address</td>
-                        <td colspan="2">Action</td>
+                        <td colspan="3">Action</td>
                     </tr>
                     </thead>
                     <tbody>
                     @if(!empty($students))
                         @foreach ($students as $student)
-                          <td> <img width = "auto" height = "50px" src="{{asset(''.$student->avatar)}}"></td>
+                            <td><img width="auto" height="50px" src="{{asset(''.$student->avatar)}}"></td>
                             <td>{{$student->full_name}}</td>
                             <td>{{$student->faculty->name}}</td>
                             <td>{{$student->email}}</td>
@@ -49,6 +49,7 @@
                                     </div>
                                 </form>
                             </td>
+
                             </tr>
                     </tbody>
                     @endforeach

@@ -51,7 +51,7 @@
                         </div>
                         <div class="form-group">
                             <strong>Avatar</strong>
-                            <input type="file" name="image" >
+                            <input type="file" name="image">
                         </div>
 
                         <div class="form-group">

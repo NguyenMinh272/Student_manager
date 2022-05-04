@@ -18,13 +18,18 @@ class Student extends Model
         'gender',
         'phone',
         'avatar',
-        'faculty_id'
+        'faculty_id',
 
     ];
 
     public function faculty()
     {
         return $this->belongsTo(Faculty::class);
+    }
+
+    public function subjects()
+    {
+        return $this->belongsToMany(Subject::class, 'student_subject','student_id','subject_id')->withPivot('mark');
     }
 
 }

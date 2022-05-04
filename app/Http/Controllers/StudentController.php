@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\Faculty;
 use App\Models\Student;
+use App\Models\Subject;
 
 use Illuminate\Http\Request;
-use DB;
+use SebastianBergmann\CodeCoverage\Driver\Selector;
+use Symfony\Component\Console\Input\Input;
 use function Symfony\Component\String\s;
 use App\Repositories\Student\StudentRepositoryInterface;
 class StudentController extends Controller
@@ -64,7 +66,7 @@ class StudentController extends Controller
             $file_name = $file->move('images', $file->getClientOriginalName());
             $data['avatar'] = $file_name;
         }
-//        dd($data);
+
         $student = $this->studentRepo->create($data);
         return redirect()->route('student.index')->with('success','Create student successful!');
     }
@@ -90,7 +92,8 @@ class StudentController extends Controller
     {
         $student = $this->studentRepo->find($id);
         $faculties = Faculty::all();
-        return view('students.edit', compact('student', 'faculties'));
+        $subjects = Subject::all();
+        return view('students.edit', compact('student', 'faculties','subjects'));
     }
 
     /**
@@ -109,11 +112,20 @@ class StudentController extends Controller
             'birthday'=>'required|date',
             'gender'=>'required',
             'phone'=>'required|max:13',
-            'faculty_id'=>'required'
+            'faculty_id'=>'required',
+            'mark'=>'required',
+            'subject_id'=>'required'
         ]);
             $student = $this->studentRepo->find($id);
+            $marks = collect($request->input('mark',[]))
+                ->map(function ($mark){
+                    return ['mark'=>$mark];
+                });
+            $student->subject =$request->input('subject_id');
+//          dd($student);
+            $student->subjects()->sync($marks);
             $student->update($request->all());
-        return redirect()->route('student.index', $id);
+            return redirect()->route('student.index', $id);
     }
 
     /**
@@ -128,4 +140,6 @@ class StudentController extends Controller
         $student->delete();
         return redirect()->route('student.index');
     }
+
+
 }
