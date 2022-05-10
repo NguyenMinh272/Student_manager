@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StudentRequest;
+use App\Http\Requests\SubjectRequest;
 use App\Models\Subject;
 use Illuminate\Http\Request;
 
@@ -26,7 +28,7 @@ class SubjectController extends Controller
     public function index()
     {
         $subjects = $this->subjectRepo->getSubject();
-        return view('subjects.index', compact('subjects'));
+        return view('subject.index', compact('subjects'));
     }
 
     /**
@@ -36,7 +38,7 @@ class SubjectController extends Controller
      */
     public function create()
     {
-        return view('subjects.create');
+        return view('subject.form');
     }
 
     /**
@@ -45,7 +47,7 @@ class SubjectController extends Controller
      * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StudentRequest $request)
     {
         $data = $request->all();
         $subject= $this->subjectRepo->create($data);
@@ -73,7 +75,7 @@ class SubjectController extends Controller
     public function edit($id)
     {
         $subject = $this->subjectRepo->find($id);
-        return view('subjects.edit', compact('subject'));
+        return view('subject.form', compact('subject'));
 
     }
 
@@ -84,11 +86,8 @@ class SubjectController extends Controller
      * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(SubjectRequest $request, $id)
     {
-        $this->validate($request, [
-            'name' => 'required|max:50'
-        ]);
         $subject = $this->subjectRepo->find($id);
         $subject->update($request->all());
 

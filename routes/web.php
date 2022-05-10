@@ -17,4 +17,5 @@ use App\Http\Controllers\StudentController;
 Route::resource('faculty', FacultyController::class);
 Route::resource('student',StudentController::class);
 Route::resource('subject',SubjectController::class);
+Route::post('/register-subject', [StudentController::class,'registerSubject'])->name('student.subject');
 
