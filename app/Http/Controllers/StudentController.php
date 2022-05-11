@@ -134,10 +134,4 @@ class StudentController extends Controller
         $student->delete();
         return redirect()->route('student.index');
     }
-
-    public function registerSubject()
-    {
-        $subjects = $this->subjectRepo->getSubject();
-        return view('result.index', compact('subjects'));
-    }
 }

@@ -47,10 +47,10 @@ class SubjectController extends Controller
      * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StudentRequest $request)
+    public function store(SubjectRequest $request)
     {
         $data = $request->all();
-        $subject= $this->subjectRepo->create($data);
+        $subject = $this->subjectRepo->create($data);
 
         return redirect()->route('subject.index')->with('success', 'Create successfully!');
     }

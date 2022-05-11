@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FacultyController;
 use App\Http\Controllers\SubjectController;
 use App\Http\Controllers\StudentController;
+use App\Http\Controllers\RegisterSubjectController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -17,5 +18,5 @@ use App\Http\Controllers\StudentController;
 Route::resource('faculty', FacultyController::class);
 Route::resource('student',StudentController::class);
 Route::resource('subject',SubjectController::class);
-Route::post('/register-subject', [StudentController::class,'registerSubject'])->name('student.subject');
+Route::resource('register', RegisterSubjectController::class);
 
