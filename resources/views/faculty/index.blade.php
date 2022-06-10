@@ -9,7 +9,7 @@
                     <h3>Faculty Management</h3>
                 </div>
                 <div class="col-md-6">
-                    <a href="{{route('faculty.create')}}" class="btn btn-primary float-end">New Faculty</a>
+                    <a href="{{route('faculties.create')}}" class="btn btn-primary float-end">New Faculty</a>
                 </div>
             </div>
         </div>
@@ -29,10 +29,10 @@
                             <th scope="row">{{$key+=1}}</th>
                             <td>{{$faculty->name}}</td>
                             <td>
-                                {!! Form::open(['method'=>'GET', 'route' => ['faculty.edit', $faculty->id]]) !!}
+                                {!! Form::open(['method'=>'GET', 'route' => ['faculties.edit', $faculty->id]]) !!}
                                 {!! Form::submit('Edit',['class'=>'btn btn-warning']) !!}
                                 {!! Form::close() !!}
-                                {!! Form::open(['method'=>'DELETE', 'route' => ['faculty.destroy', $faculty->id], 'onsubmit'=>'return confirm("Are you sure?")']) !!}
+                                {!! Form::open(['method'=>'DELETE', 'route' => ['faculties.destroy', $faculty->id], 'onsubmit'=>'return confirm("Are you sure?")']) !!}
                                 {!! Form::submit('Delete',['class'=>'btn btn-danger']) !!}
                                 {!! Form::close() !!}
                             </td>

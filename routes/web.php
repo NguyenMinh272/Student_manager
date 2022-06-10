@@ -15,8 +15,12 @@ use App\Http\Controllers\RegisterSubjectController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::resource('faculty', FacultyController::class);
-Route::resource('student',StudentController::class);
-Route::resource('subject',SubjectController::class);
-Route::resource('register', RegisterSubjectController::class);
+Route::resource('faculties', FacultyController::class);
+Route::resource('students',StudentController::class);
+Route::resource('subjects',SubjectController::class);
+
+Route::get('/students/subjects/{id}',
+    [StudentController::class, 'createSubjects'])->name('students.subjects.createSubjects');
+Route::post('/students/subjects/{id}',
+    [StudentController::class, 'storeSubject'])->name('students.subjects.storeSubject');
 

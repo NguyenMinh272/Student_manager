@@ -8,15 +8,15 @@
                         <h3>New faculty</h3>
                     </div>
                     <div class="col-md-6">
-                        <a href="{{route('faculty.index')}}" class="btn btn-primary float-end">Faculty List</a>
+                        <a href="{{route('faculties.index')}}" class="btn btn-primary float-end">Faculty List</a>
                     </div>
                 </div>
             </div>
             <div class="card-body">
                 @if(!isset($faculty))
-                    {!! Form::open(array('route' => 'faculty.store','method' => 'post')) !!}
+                    {!! Form::open(array('route' => 'faculties.store','method' => 'post')) !!}
                 @else
-                    {!! Form::open(array('route' => ['faculty.update',$faculty->id],'method' => 'put')) !!}
+                    {!! Form::open(array('route' => ['faculties.update',$faculty->id],'method' => 'put')) !!}
                 @endif
                 <div class="row">
                     <div class="col-md-6">

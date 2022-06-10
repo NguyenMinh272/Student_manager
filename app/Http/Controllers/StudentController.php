@@ -12,7 +12,7 @@ use App\Repositories\Subject\SubjectRepositoryInterface;
 use Illuminate\Http\Request;
 use SebastianBergmann\CodeCoverage\Driver\Selector;
 use Symfony\Component\Console\Input\Input;
-use function Symfony\Component\String\s;
+use function Symfony\Component\String;
 use App\Repositories\Student\StudentRepositoryInterface;
 
 class StudentController extends Controller
@@ -36,9 +36,10 @@ class StudentController extends Controller
         $this->facultyRepo = $facultyRepo;
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        $students = $this->studentRepo->getStudent();
+        $faculties = $this->facultyRepo->getFaculty()->pluck('name', 'id');
+        $students = $this->studentRepo->search($request->all());
 
         return view('student.index', compact('students'));
     }
@@ -83,7 +84,9 @@ class StudentController extends Controller
      */
     public function show($id)
     {
-        //
+        $student = $this->studentRepo->find($id);
+
+        return view('student.detail', compact('student'));
     }
 
     /**
@@ -133,5 +136,20 @@ class StudentController extends Controller
         $student = $this->studentRepo->find($id);
         $student->delete();
         return redirect()->route('student.index');
+    }
+
+    public function createSubjects($id)
+    {
+        $subjects = $this->subjectRepo->getSubject();
+        $student = $this->studentRepo->find($id);
+
+        return view('student.register_subject', compact('student', 'subjects'));
+    }
+
+    public function storeSubject(Request $request, $id)
+    {
+        $this->studentRepo->find($id)->subjects()->syncWithoutDetaching($request['subject_id']);
+
+        return redirect()->route('students.index')->with('success', 'Successfully !');
     }
 }

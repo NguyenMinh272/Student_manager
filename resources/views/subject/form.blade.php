@@ -8,15 +8,15 @@
                         <h3>New Subject</h3>
                     </div>
                     <div class="col-md-6">
-                        <a href="{{route('subject.index')}}" class="btn btn-primary float-end">Subject List</a>
+                        <a href="{{route('subjects.index')}}" class="btn btn-primary float-end">Subject List</a>
                     </div>
                 </div>
             </div>
             <div class="card-body">
                 @if(!isset($subject))
-                    {!! Form::open(array('route' => 'subject.store','method' => 'post')) !!}
+                    {!! Form::open(array('route' => 'subjects.store','method' => 'post')) !!}
                 @else
-                    {!! Form::open(array('route' => ['subject.update',$subject->id],'method' => 'put')) !!}
+                    {!! Form::open(array('route' => ['subjects.update',$subject->id],'method' => 'put')) !!}
                 @endif
                 <div class="row">
                     <div class="col-md-6">

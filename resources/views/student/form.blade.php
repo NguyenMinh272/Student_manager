@@ -8,15 +8,15 @@
                         <h3>New Student</h3>
                     </div>
                     <div class="col-md-6">
-                        <a href="{{route('student.index')}}" class="btn btn-primary float-end">Student List</a>
+                        <a href="{{route('students.index')}}" class="btn btn-primary float-end">Student List</a>
                     </div>
                 </div>
             </div>
             <div class="card-body">
                 @if(!isset($student))
-                    {!! Form::open(array('route' => 'student.store','method' => 'post','enctype'=>'multipart/form-data')) !!}
+                    {!! Form::open(array('route' => 'students.store','method' => 'post','enctype'=>'multipart/form-data')) !!}
                 @else
-                    {!! Form::open(array('route' => ['student.update',$student->id],'method' => 'put','enctype'=>'multipart/form-data')) !!}
+                    {!! Form::open(array('route' => ['students.update',$student->id],'method' => 'put','enctype'=>'multipart/form-data')) !!}
                 @endif
                 <div class="row">
                     <div class="col-md-6">
